@@ -1,5 +1,7 @@
 import * as THREE from 'three'
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 const scene=new THREE.Scene();
+scene.background=new THREE.Color(0.5,0.5,0.5)
 const camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
 camera.position.z=50;
 // renderer using canvas
@@ -39,60 +41,35 @@ const lightSphare=new THREE.Mesh(lightGeometry,lightmaterial)
 
 
 scene.add(cube,lightSphare);
-// cube.position.x=4
-// cube.rotation.x=1 // rn this is taking value in radian
-// to use degree we have a formula
-// cube.rotation.x=Math.PI * (45/180.0)
-// renderer.render(scene,camera)
-// now implementing animation using function
+
+pointLight.position.set(0,0,20)
+     
+    lightSphare.position.set(0,0,20)
+const controls=new OrbitControls(camera,renderer.domElement)
 
 
 let flag=true;
 
-// function animate()
-// {
 
-//     if(cube.position.x>5) flag=false;
-//     else if(cube.position.x< -5) flag=true
-
-//     if(flag)cube.position.x+=0.1
-//     else cube.position.x-=0.1
-//     // to give rotation to cube
-//     cube.rotation.x+=0.05
-//     cube.rotation.y+=0.05
-//     cube.rotation.z+=0.05
-//     // cube.position.y+=0.1
-//     // cube.position.z+=0.1
-
-
-
-//     renderer.render(scene,camera)
-//     requestAnimationFrame(animate);
-// }
-// // for safety purpose  because sometimes any system is not capable for much smothness
- 
-// animate()
-// // setInterval(animate,100)
-
-// q represents theta here 
 let q=0
 animate()
 function animate()
 {
+    controls.update();
     q+=0.01
     let qsin=Math.sin(q);
     let qcos=Math.cos(q);
-    cube.position.x=3*qsin
+    // cube.position.x=3*qsin
 
     let scaledCos=30 *qcos
     let scaledSin=30 *qsin
-    pointLight.position.set(scaledCos,0,scaledSin)
+    // pointLight.position.set(scaledCos,0,scaledSin)
      
-    lightSphare.position.set(scaledCos,0,scaledSin)
+    // lightSphare.position.set(scaledCos,0,scaledSin)
 
-    cube.rotation.x+=0.01
-        cube.rotation.y+=0.01
-        cube.rotation.z+=0.01
+    // cube.rotation.x+=0.01
+    //     cube.rotation.y+=0.01
+    //     cube.rotation.z+=0.01
     renderer.render(scene,camera)
     requestAnimationFrame(animate);
 }
