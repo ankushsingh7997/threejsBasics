@@ -28,13 +28,58 @@ scene.add(pointLight)
 // const geometry=new THREE.CapsuleGeometry(1,1,50,8)
 // const geometry=new THREE.CircleGeometry(2,32)
 // const geometry=new THREE.ConeGeometry(2,2,50)
-const geometry=new THREE.CylinderGeometry(5,5,32,16);
+// const geometry=new THREE.CylinderGeometry(5,5,32,16);
+
+// const geometry=new THREE.BufferGeometry()
+// const vertices=new Float32Array([
+//     -1.0,-1.0,1.0,
+//     1.0,-1.0,1.0,
+//     1.0,1.0,1.0,
+
+//     1.0,1.0,1.0,
+//     -1.0,1.0,1.0,
+//     -1.0,-1.0,1.0,
+// ]);
+// geometry.setAttribute('position',new THREE.BufferAttribute(vertices,3))
+
+const geometry=new THREE.BufferGeometry();
+const vertices=new Float32Array([
+    -1.0,-1.0,1.0,
+    1.0,-1.0,1.0,
+    1.0,1.0,1.0,
+    -1.0,1.0,1.0,
+]);
+const color=new Float32Array([
+    1.0,0.0,0.0,
+    0.0,1.0,0.0,
+    1.0,1.0,1.0
+]);
+const normals=new Float32Array([
+    1.0,1.0,1.0,
+    1.0,1.0,1.0,
+    1.0,1.0,1.0,
+    1.0,1.0,1.0,
+])
+const indeces=[
+    0,1,2,
+    2,3,0
+]
+geometry.setAttribute('position',new THREE.BufferAttribute(vertices,3))
+geometry.setAttribute('color',new THREE.BufferAttribute(color,3))
+geometry.setAttribute('normal',new THREE.BufferAttribute(normals,3))
+geometry.setIndex(indeces)
+
+
+const material=new THREE.MeshStandardMaterial({vertexColors:true})
+const mesh=new THREE.Mesh(geometry,material);
+scene.add(mesh)
+
 // const material=new THREE.MeshBasicMaterial({color:'red'})
 // if we want it to react on light the we have to use 
 // const material=new THREE.MeshStandardMaterial({color:'red'})
 // const cube=new THREE.Mesh(geometry,material);
-const material=new THREE.PointsMaterial({color:'red',size:0.5})
-const cube=new THREE.Points(geometry,material);
+// const material=new THREE.PointsMaterial({color:'red',size:0.5})
+// const cube=new THREE.Points(geometry,material);
 
 // if using Line to see in skeleton form
 // const cube=new THREE.Line(geometry,material);
@@ -43,8 +88,8 @@ const lightGeometry=new THREE.SphereGeometry(1,12,16)
 const lightmaterial=new THREE.MeshBasicMaterial({color:'white'})
 const lightSphare=new THREE.Mesh(lightGeometry,lightmaterial)
 
-
-scene.add(cube,lightSphare);
+// scene.add(cube,lightSphare);
+scene.add(lightSphare);
 
 pointLight.position.set(0,0,20)
      
@@ -67,9 +112,9 @@ function animate()
 
     let scaledCos=30 *qcos
     let scaledSin=30 *qsin
-    // pointLight.position.set(scaledCos,0,scaledSin)
+    pointLight.position.set(scaledCos,0,scaledSin)
      
-    // lightSphare.position.set(scaledCos,0,scaledSin)
+    lightSphare.position.set(scaledCos,0,scaledSin)
 
     // cube.rotation.x+=0.01
     //     cube.rotation.y+=0.01
