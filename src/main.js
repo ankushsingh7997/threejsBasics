@@ -22,16 +22,20 @@ const pointLight=new THREE.PointLight(0xffffff,1,100)
 scene.add(pointLight)
 
 // to create a shape
-const geometry=new THREE.BoxGeometry(5,5,5)
+// const geometry=new THREE.BoxGeometry(5,5,5)
+// const geometry=new THREE.SphereGeometry(5,32,32)
 // capsule geometry
 // const geometry=new THREE.CapsuleGeometry(1,1,50,8)
 // const geometry=new THREE.CircleGeometry(2,32)
 // const geometry=new THREE.ConeGeometry(2,2,50)
-// const geometry=new THREE.CylinderGeometry(1.5,2,3,100);
+const geometry=new THREE.CylinderGeometry(5,5,32,16);
 // const material=new THREE.MeshBasicMaterial({color:'red'})
 // if we want it to react on light the we have to use 
-const material=new THREE.MeshStandardMaterial({color:'red'})
-const cube=new THREE.Mesh(geometry,material);
+// const material=new THREE.MeshStandardMaterial({color:'red'})
+// const cube=new THREE.Mesh(geometry,material);
+const material=new THREE.PointsMaterial({color:'red',size:0.5})
+const cube=new THREE.Points(geometry,material);
+
 // if using Line to see in skeleton form
 // const cube=new THREE.Line(geometry,material);
 
